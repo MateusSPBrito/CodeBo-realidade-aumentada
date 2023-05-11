@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>CodeBo-realidade-aumentada</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/scene.js" defer></script>
+  </head>
+
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+  <body style="margin: 0px; overflow: hidden">
+    <a-scene embedded arjs vr-mode-ui="false">
+      <a-marker
+        class="level-1"
+        type="pattern"
+        url="https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/pattern-0.patt?v=1683847598678"
+      >
+        <a-entity
+          position="0 0 0"
+          id="codebo"
+          gltf-model="url(https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/codebo.glb?v=1683847439252)"
+          scale="1 1 1"
+          rotation="0 0 0"
+        ></a-entity>
+      </a-marker>
+
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
