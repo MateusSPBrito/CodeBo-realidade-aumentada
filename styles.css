@@ -13,3 +13,25 @@ iframe{
   height: 100vh;
   z-index: 1;
 }
+
+#play-btn{
+  width: 25vw;
+  height: 25vw;
+  max-width: 100px;
+  max-height: 100px;
+  background-color: #005410;
+  border: 7.5px solid #00A313;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #00A313;
+  font-size: 40px;
+}
+
+#play-btn::before{
+  content: '▶';  
+}
