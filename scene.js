@@ -19,16 +19,18 @@ const fases = [
 ];
 
 const commands = [
-  "walk",
-  "walk",
-  "walk",
-  "rotateRight",
-  "rotateRight",
-  "walk",
-  "walk",
-  "rotateLeft",
-  "walk",
-  "walk",
+  // "walk",
+  // "walk",
+  "newStack",
+  // "walk",
+  // "walk",
+  // "walk",
+  // "rotateRight",
+  // "walk",
+  // "walk",
+  // "rotateLeft",
+  // "walk",
+  // 'walk'
 ];
 
 class CodeBo {
@@ -39,6 +41,7 @@ class CodeBo {
     this.direction = "right";
     this.idPosition = 0;
     this.intervalGame;
+    this.stacks = []
   }
   setStartingPosition() {
     localStorage.removeItem("play");
@@ -53,14 +56,13 @@ class CodeBo {
     );
     entity.setAttribute("rotation", `0 90 0`);
   }
-  
-   start() {
+
+  start() {
     if (faseId == -1) return;
     inGame = true;
     let i = 0;
     this.intervalGame = setInterval(() => {
       this.processCommand(commands[i]);
-      console.log("oiiiii");
       i++;
       if (i == commands.length) clearInterval(this.intervalGame);
     }, 1000);
@@ -77,62 +79,54 @@ class CodeBo {
       case "rotateLeft":
         this.rotate("left");
         break;
+      case "newStack":
+        this.createStack();
+        break;
       default:
         return;
     }
   }
 
   walk() {
-    const correct = this.checkCorrectWalk();
-    if (!correct){
+    const nextPosition = this.checkNextPosition();
+    if (!nextPosition) {
+      //erro
       clearInterval(this.intervalGame);
-      setTimeout(()=>{this.setStartingPosition()},1000)
-      return
-    };
-    this.idPosition++;
-    switch (this.direction) {
-      case "right":
-        this.positionX++;
-        entity.setAttribute(
-          "position",
-          `${this.positionX} ${this.positionZ} ${this.positionY}`
-        );
-        break;
-      case "left":
-        this.positionX--;
-        entity.setAttribute(
-          "position",
-          `${this.positionX} ${this.positionZ} ${this.positionY}`
-        );
-        break;
-      case "top":
-        this.positionY--;
-        entity.setAttribute(
-          "position",
-          `${this.positionX} ${this.positionZ} ${this.positionY}`
-        );
-        break;
-      case "bottom":
-        this.positionY++;
-        entity.setAttribute(
-          "position",
-          `${this.positionX} ${this.positionZ} ${this.positionY}`
-        );
-        break;
-      default:
-        return;
+      setTimeout(() => {
+        this.setStartingPosition();
+      }, 1000);
+      return;
     }
+    this.idPosition++;
+
+    this.positionX = nextPosition.x;
+    this.positionY = nextPosition.y;
+    this.positionZ = nextPosition.z;
+
+    entity.setAttribute(
+      "position",
+      `${this.positionX} ${this.positionZ} ${this.positionY}`
+    );
   }
 
-  checkCorrectWalk() {
-    let newPosition = {x: this.positionX, y: this.positionY}
-    if (this.direction == "right") newPosition.x++
-    else if (this.direction == "left")newPosition.x--
-    else if (this.direction == "top")newPosition.y--
-    else if (this.direction == "bottom")newPosition.y++
-    for(let i = 0; i < fases[faseId].data.length; i++){
-      const coord = fases[faseId].data[i]
-      if(coord.x == newPosition.x && coord.y == Math.abs(newPosition.y)) return true
+  checkNextPosition() {
+    let nextPosition = {
+      x: this.positionX,
+      y: this.positionY,
+      z: this.positionZ,
+    };
+    if (this.direction == "right") nextPosition.x++;
+    else if (this.direction == "left") nextPosition.x--;
+    else if (this.direction == "top") nextPosition.y--;
+    else if (this.direction == "bottom") nextPosition.y++;
+    for(let i = 0; i < this.stacks.length; i++){
+      if (this.stacks[i].x == nextPosition.x && this.stacks[i].y == nextPosition.y)
+        return false;
+    }
+    for (let i = 0; i < fases[faseId].data.length; i++) {
+      const coord = fases[faseId].data[i];
+      if (coord.x == nextPosition.x && coord.y == Math.abs(nextPosition.y))
+        return nextPosition;
     }
     return false;
   }
@@ -152,6 +146,28 @@ class CodeBo {
       else if (this.direction == "bottom") this.direction = "right";
       else if (this.direction == "left") this.direction = "bottom";
     }
+  }
+
+  createStack() {
+    const nextPosition = this.checkNextPosition();
+    if (!nextPosition) {
+      //erro
+      clearInterval(this.intervalGame);
+      setTimeout(() => {
+        this.setStartingPosition();
+      }, 1000);
+      return;
+    }
+
+    const newStack = document.createElement("a-box");
+    newStack.setAttribute("color", "#838383");
+    newStack.setAttribute(
+      "position",
+      `${nextPosition.x} ${nextPosition.z} ${nextPosition.y}`
+    );
+    newStack.setAttribute("height", 0.01)
+    marker.appendChild(newStack);
+    this.stacks.push(nextPosition)
   }
 }
 
