@@ -30,7 +30,11 @@ const commands = [
   // "walk",
   // "rotateLeft",
   // "walk",
-  // 'walk'
+  // 'walk',
+  'boxStack',
+  'boxStack',
+  'robotStack',
+  
 ];
 
 class CodeBo {
@@ -82,6 +86,12 @@ class CodeBo {
       case "newStack":
         this.createStack();
         break;
+      case "boxStack":
+        this.stackUp(false);
+        break;
+      case "robotStack":
+        this.stackUp(true);
+        break;
       default:
         return;
     }
@@ -111,6 +121,7 @@ class CodeBo {
 
   checkNextPosition() {
     let nextPosition = {
+      stack: false,
       x: this.positionX,
       y: this.positionY,
       z: this.positionZ,
@@ -119,9 +130,11 @@ class CodeBo {
     else if (this.direction == "left") nextPosition.x--;
     else if (this.direction == "top") nextPosition.y--;
     else if (this.direction == "bottom") nextPosition.y++;
+    
     for(let i = 0; i < this.stacks.length; i++){
-      if (this.stacks[i].x == nextPosition.x && this.stacks[i].y == nextPosition.y)
-        return false;
+      if(this.stacks[i].x == nextPosition.x && Math.abs(this.stacks[i].y) == Math.abs(nextPosition.y)){
+        nextPosition.stack = this.stacks[i]
+      }
     }
     for (let i = 0; i < fases[faseId].data.length; i++) {
       const coord = fases[faseId].data[i];
@@ -158,17 +171,57 @@ class CodeBo {
       }, 1000);
       return;
     }
-
+    nextPosition.size = 0;
+    nextPosition.id = this.stacks.length;
     const newStack = document.createElement("a-box");
     newStack.setAttribute("color", "#838383");
     newStack.setAttribute(
       "position",
-      `${nextPosition.x} ${nextPosition.z} ${nextPosition.y}`
+      `${nextPosition.x} ${nextPosition.z - 0.5} ${nextPosition.y}`
     );
     newStack.setAttribute("height", 0.01)
     marker.appendChild(newStack);
+    delete nextPosition.stack
     this.stacks.push(nextPosition)
   }
+  
+  stackUp(robot){
+    const nextPosition = this.checkNextPosition();
+    if (!nextPosition || !nextPosition.stack) {
+      //erro
+      clearInterval(this.intervalGame);
+      setTimeout(() => {
+        this.setStartingPosition();
+      }, 1000);
+      return;
+    }
+    const stackId = nextPosition.stack.id
+    if(robot){
+      this.stacks[stackId].size++
+      console.log(this.stacks[stackId].z + this.stacks[stackId].size)
+      entity.setAttribute(
+      "position",
+      `${this.stacks[stackId].x} 
+      ${this.stacks[stackId].z + this.stacks[stackId].size - 1}
+      ${this.stacks[stackId].y}`
+    );
+    }
+    else{
+      this.stacks[stackId].size++
+      const boxStack = document.createElement("a-box");
+      boxStack.setAttribute("color", "#838383");
+      boxStack.setAttribute(
+      "position",
+      `${this.stacks[stackId].x} 
+      ${this.stacks[stackId].z + this.stacks[stackId].size - 1}
+      ${this.stacks[stackId].y}`
+      );
+      marker.appendChild(boxStack);
+    }
+    console.log(this.stacks[stackId])
+  }
+  
+  
 }
 
 const codeBo = new CodeBo();
