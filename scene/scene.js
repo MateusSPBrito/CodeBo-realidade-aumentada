@@ -6,19 +6,17 @@ import {CodeBo} from "./CodeBo.js"
 
 
 const commands = [
-  "walk",
-  "walk",
-  "walk",
+  'walk',
+  'walk',
   "walk",
   "rotateRight",
   "walk",
   "walk",
   "rotateLeft",
-  "walk",
   "newStack",
   'boxStack',
   'robotStack',
-  
+  'unstack',
 ];
 
 const codeBo = new CodeBo(marker, entity);
