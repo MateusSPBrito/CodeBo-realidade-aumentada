@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <title>CodeBo-realidade-aumentada</title>
     <link rel="stylesheet" href="../styles.css" />
-    <script src="scene.js" type="module" defer></script>
+    <script src="scene.js" defer></script>
   </head>
 
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script src="/class/CodeBo.js"></script>
+  <script src="/constants/fases.js"></script>
 
   <body style="margin: 0px; overflow: hidden">
     <a-scene embedded arjs vr-mode-ui="false">
@@ -27,7 +29,7 @@
         ></a-entity>
       </a-marker>
 
-      <a-entity camera></a-entity>
+      <a-entity styles="display: none" camera></a-entity>
     </a-scene>
   </body>
 </html>

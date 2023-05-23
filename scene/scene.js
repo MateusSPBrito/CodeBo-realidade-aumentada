@@ -1,9 +1,6 @@
 const marker = document.querySelector("a-marker");
 const entity = document.getElementById("codebo");
 let faseId = -1;
-import {CodeBo} from "./CodeBo.js"
-
-
 
 const commands = [
   'walk',
