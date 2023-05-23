@@ -1,20 +1,4 @@
-const fases = [
-  {
-    fase: 1,
-    data: [
-      { x: 0, z: 0, y: 2 },
-      { x: 1, z: 0, y: 2 },
-      { x: 2, z: 0, y: 2 },
-      { x: 3, z: 0, y: 2 },
-      { x: 3, z: 0, y: 1 },
-      { x: 3, z: 0, y: 0 },
-      { x: 4, z: 0, y: 0 },
-      { x: 5, z: 1, y: 0 },
-    ],
-  },
-];
-
-export class CodeBo {
+class CodeBo {
   constructor(marker, entity) {
     this.marker = marker;
     this.entity = entity;
@@ -245,4 +229,6 @@ export class CodeBo {
       this.setStartingPosition(this.faseId);
     }, 1000);
   }
+  
+  teste(){console.log('funcionando')}
 }
