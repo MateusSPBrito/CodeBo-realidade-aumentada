@@ -2,31 +2,19 @@ const marker = document.querySelector("a-marker");
 const entity = document.getElementById("codebo");
 let faseId = -1;
 
-const commands = [
-  'walk',
-  'walk',
-  "walk",
-  "rotateRight",
-  "walk",
-  "walk",
-  "rotateLeft",
-  "newStack",
-  'boxStack',
-  'robotStack',
-  'unstack',
-];
-
 const codeBo = new CodeBo(marker, entity);
 
 let intervalCheckStart;
 let inGame = false;
 
 const checkStart = () => {
-  localStorage.removeItem("play");
   intervalCheckStart = setInterval(() => {
-    if (!inGame && localStorage.getItem("play")) {
+    const commands = JSON.parse(localStorage.getItem("commands"))
+    console.log(faseId,commands)
+    if (commands && faseId != -1) {
       clearInterval(intervalCheckStart);
       codeBo.start(commands);
+      console.log('dentro')
     }
   }, 100);
 };
@@ -41,4 +29,5 @@ marker.addEventListener("markerLost", () => {
   faseId = -1;
   inGame = false;
   clearInterval(intervalCheckStart);
+  codeBo.lostMarker()
 });
