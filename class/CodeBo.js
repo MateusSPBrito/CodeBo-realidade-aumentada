@@ -8,10 +8,12 @@ class CodeBo {
     this.positionY = 0;
     this.direction = "right";
     this.stacks = [];
-    this.currentStack = -1
-    this.intervalGame
+    this.currentStack = -1;
+    this.intervalGame;
   }
+  
   setStartingPosition(faseId) {
+    this.visible = true;
     this.faseId = faseId;
     localStorage.removeItem("play");
     if (this.faseId == -1) return;
@@ -23,10 +25,10 @@ class CodeBo {
       "position",
       `${this.positionX} ${this.positionZ} ${this.positionY}`
     );
-    this.entity.setAttribute("rotation", `0 90 0`);
+    this.entity.setAttribute("rotation", `0 90 0`)
   }
 
-  start(commands) {
+   start(commands) {
     if (this.faseId == -1) return;
     let i = 0;
     this.intervalGame = setInterval(() => {
@@ -66,7 +68,6 @@ class CodeBo {
 
   walk() {
     const nextPosition = this.checkNextPosition();
-    console.log(nextPosition)
     if (!nextPosition || nextPosition.stack || this.currentStack != -1) {
       this.erro("walk");
       return;
@@ -150,7 +151,6 @@ class CodeBo {
       this.erro("unstack1");
       return;
     }
-    console.log(this.currentStack)
     if(this.currentStack != -1){ //desempilha codebo
       const stack = this.stacks[this.currentStack]
       if(nextPosition.z + 1 != stack.z + stack.size) { //nivel da pilha diferente do nivel do terreno
@@ -230,5 +230,9 @@ class CodeBo {
     }, 1000);
   }
   
-  teste(){console.log('funcionando')}
+  lostMarker(){
+    clearInterval(this.intervalGame);
+    this.stacks = [];
+    this.currentStack = -1;
+  }
 }

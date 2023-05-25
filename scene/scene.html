@@ -14,7 +14,7 @@
   <script src="/constants/fases.js"></script>
 
   <body style="margin: 0px; overflow: hidden">
-    <a-scene embedded arjs vr-mode-ui="false">
+    <a-scene class="aframebox" embedded arjs vr-mode-ui="false">
       <a-marker
         class="level-1"
         type="pattern"
@@ -29,7 +29,7 @@
         ></a-entity>
       </a-marker>
 
-      <a-entity styles="display: none" camera></a-entity>
+      <a-entity camera></a-entity>
     </a-scene>
   </body>
 </html>
