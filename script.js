@@ -1,22 +1,22 @@
 const btns = [
-  {img: 'https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/button_stack_new.png?v=1684875531011', command: 'newStack'},
-  {img: 'https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/button_stack_block_push.png?v=1684875533343', command: 'boxStack'},
-  {img: 'https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/button_stack_character_push.png?v=1684875533679', command: 'robotStack'},
-  {img: 'https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/button_stack_pop.png?v=1684875531362', command: 'unstack'},
-  {img: 'https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/button_forward.png?v=1684875603575', command: 'walk'},
-  {img: 'https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/button_left.png?v=1684875532237', command: 'rotateLeft'},
-  {img: 'https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/button_right.png?v=1684875532935', command: 'rotateRight'},
-  {img: 'https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/button_play.png?v=1684875532564', command: 'play'}
+  {img: './assets/imgs/button_stack_new.png', command: 'newStack'},
+  {img: './assets/imgs/button_stack_block_push.png', command: 'boxStack'},
+  {img: './assets/imgs/button_stack_character_push.png', command: 'robotStack'},
+  {img: './assets/imgs/button_stack_pop.png', command: 'unstack'},
+  {img: './assets/imgs/button_forward.png', command: 'walk'},
+  {img: './assets/imgs/button_left.png', command: 'rotateLeft'},
+  {img: './assets/imgs/button_right.png', command: 'rotateRight'},
+  {img: './assets/imgs/button_play.png', command: 'play'}
 ]
 
 const iptImgs = {
-  newStack: 'https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/button_stack_new_mini.png?v=1684953104772',
-  boxStack: 'https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/button_stack_block_push_mini.png?v=1684953105440',
-  robotStack: 'https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/button_stack_character_push_mini.png?v=1684953105112',
-  unstack: 'https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/button_stack_pop_mini.png?v=1684953104405',
-  walk: 'https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/button_forward_mini.png?v=1684953104039',
-  rotateLeft: 'https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/button_left_mini.png?v=1684953103691',
-  rotateRight: 'https://cdn.glitch.global/f1b6a269-6e6a-4759-8e69-14c7e827fa7f/button_right_mini.png?v=1684953103335',
+  newStack: './assets/imgs/button_stack_new_mini.png',
+  boxStack: './assets/imgs/button_stack_block_push_mini.png',
+  robotStack: './assets/imgs/button_stack_character_push_mini.png',
+  unstack: './assets/imgs/button_stack_pop_mini.png',
+  walk: './assets/imgs/button_forward_mini.png',
+  rotateLeft: './assets/imgs/button_left_mini.png',
+  rotateRight: './assets/imgs/button_right_mini.png',
 }
 
 const commands = []
